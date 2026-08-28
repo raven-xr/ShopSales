@@ -54,11 +54,9 @@ def generate_fake_products(count: int, min_cost: float = 0.99, max_cost = 999.99
                 ('{name}', {price}, {cost_price}, {discontinued})
             """)
         connection.commit()
-        print(cursor.fetchall())
     # Something went wrong
     except Exception as error:
         print(error)
-        return
     # Disconnection
     finally:
         if cursor:
