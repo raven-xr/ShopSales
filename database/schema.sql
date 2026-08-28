@@ -13,7 +13,6 @@ CREATE TABLE products
 (
 	product_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	product_name VARCHAR(32) NOT NULL,
-	category VARCHAR(32) NOT NULL,
 	price DECIMAL(5, 2) NOT NULL, -- dollars
 	cost_price DECIMAL(5, 2) NOT NULL, -- dollars
 	discontinued BOOL NOT NULL
