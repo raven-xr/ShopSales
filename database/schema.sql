@@ -57,7 +57,7 @@ CREATE TABLE delivery_statuses
 );
 INSERT INTO delivery_statuses
 VALUES 
-(0, 'filling out', 'Employees collect the order'),
+(0, 'filling out', 'The employees are collecting the order'),
 (1, 'awaiting', 'The order has been collected and is awaiting delivery at the warehouse'),
 (2, 'on the way', 'The order is being delivered'),
 (3, 'delivered', 'The order is delivered');
