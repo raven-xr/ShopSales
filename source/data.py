@@ -5,7 +5,7 @@ from faker import Faker
 import faker_commerce
 
 
-SPECIAL_PRICES = [
+SPECIAL_PRICE_ENDINGS = [
     '.99',
     '.97',
     '.95',
@@ -13,6 +13,19 @@ SPECIAL_PRICES = [
     '.67',
     '.49',
     '.01'
+]
+
+SPECIAL_COST_PRICE_ENDINGS = [
+    '.90',
+    '.80',
+    '.70',
+    '.60',
+    '.50',
+    '.40',
+    '.30',
+    '.20',
+    '.10',
+    '.00'
 ]
 
 
@@ -45,8 +58,8 @@ def generate_fake_products(count: int, min_cost: float = 0.99, max_cost = 999.99
         for _ in range(count):
             # Fake data
             name = fake.ecommerce_name()
-            price = str(random.randint(0, 999)) + random_element(SPECIAL_PRICES)
-            cost_price = str(ceil(float(price) * random.uniform(0.5, 0.9))) + random_element(SPECIAL_PRICES)
+            price = str(random.randint(0, 999)) + random_element(SPECIAL_PRICE_ENDINGS)
+            cost_price = str(ceil(float(price) * random.uniform(0.5, 0.9))) + random_element(SPECIAL_COST_PRICE_ENDINGS)
             discontinued = str(bool(random.randint(0, 1))).lower()
             # Run SQL code
             cursor.execute(f"""
