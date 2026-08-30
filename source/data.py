@@ -54,7 +54,7 @@ def generate_fake_products(count: int, min_price: int = 0, max_price: int = 999)
     """
     fake = Faker() # Create a generator
     fake.add_provider(faker_commerce.Provider) # Create a provider of products
-    # Connection to database
+    # Connection to the database
     try:
         connection = connect(
             dbname=dbname_,
@@ -67,7 +67,7 @@ def generate_fake_products(count: int, min_price: int = 0, max_price: int = 999)
         # Generation process
         for _ in range(count):
             # Fake data
-            name = fake.ecommerce_name()
+            name = fake.unique.ecommerce_name()
             price = str(random.randint(min_price, max_price)) + random_element(SPECIAL_PRICE_ENDINGS)
             cost_price = str(ceil(float(price) * random.uniform(0.5, 0.9))) + random_element(SPECIAL_COST_PRICE_ENDINGS)
             discontinued = str(bool(random.randint(0, 1))).lower()
