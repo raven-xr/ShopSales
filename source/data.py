@@ -29,6 +29,14 @@ SPECIAL_COST_PRICE_ENDINGS = [
 ]
 
 
+# Data to connect to the DB. Don't forget to change it for yours
+dbname_ = "sale" 
+user_ = "postgres"
+password_ = "1928"
+host_ = "127.0.0.1"
+port_ = "5432"
+
+
 def random_element(array: list):
     """The function returns random item from iterable object"""
     index = random.randint(0, len(array) - 1)
@@ -49,11 +57,11 @@ def generate_fake_products(count: int, min_price: int = 0, max_price: int = 999)
     # Connection to database
     try:
         connection = connect(
-            database="sale",
-            user="postgres",
-            password="1928",
-            host="127.0.0.1",
-            port="5432"
+            dbname=dbname_,
+            user=user_,
+            password=password_,
+            host=host_,
+            port=port_
         )
         cursor = connection.cursor()
         # Generation process
