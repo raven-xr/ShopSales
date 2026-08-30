@@ -30,20 +30,22 @@ SPECIAL_COST_PRICE_ENDINGS = [
 
 
 def random_element(array: list):
+    """The function returns random item from iterable object"""
     index = random.randint(0, len(array) - 1)
     return array[index]
 
 
-def generate_fake_products(count: int, min_cost: float = 0.99, max_cost = 999.99) -> None:
+def generate_fake_products(count: int, min_price: int = 0, max_price: int = 999) -> None:
     """
-    This function generates fake table of products
+    The function generates fake records for the "products" table and commit the changes
     * count - how many records should be created
-    * min_cost - the minimal cost of products
-    * max_cost - the maximal cost of products
+    * min_price - the minimal price of products (the integer part)
+    * max_price - the maximal price of products (the integer part)
+    After the generation of the integer part of the price, random special ending will be added to the price (look SPECIAL_PRICE_ENDINGS const.)
+    So if min_price = 0, you can get 0.99 or 0.01 or 0.67 and yet if max_price = 999, you can get 999.99 or 999.67 and etc
     """
     fake = Faker() # Create a generator
     fake.add_provider(faker_commerce.Provider) # Create a provider of products
-
     # Connection to database
     try:
         connection = connect(
@@ -58,7 +60,7 @@ def generate_fake_products(count: int, min_cost: float = 0.99, max_cost = 999.99
         for _ in range(count):
             # Fake data
             name = fake.ecommerce_name()
-            price = str(random.randint(0, 999)) + random_element(SPECIAL_PRICE_ENDINGS)
+            price = str(random.randint(min_price, max_price)) + random_element(SPECIAL_PRICE_ENDINGS)
             cost_price = str(ceil(float(price) * random.uniform(0.5, 0.9))) + random_element(SPECIAL_COST_PRICE_ENDINGS)
             discontinued = str(bool(random.randint(0, 1))).lower()
             # Run SQL code
