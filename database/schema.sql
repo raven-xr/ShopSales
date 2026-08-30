@@ -33,9 +33,7 @@ CREATE TABLE order_details
 	order_id INT,
 	product_id INT,
 	amount SMALLINT NOT NULL CHECK (amount > 0),
-	order_sum DECIMAL(10, 2) NOT NULL, -- dollars
-
-	CONSTRAINT pk_order_product_id PRIMARY KEY(order_id, product_id)
+	order_sum DECIMAL(10, 2) NOT NULL -- dollars
 );
 
 DROP TABLE IF EXISTS deliveries CASCADE;
