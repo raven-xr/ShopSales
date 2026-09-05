@@ -43,6 +43,46 @@ def random_element(array: list):
     return array[index]
 
 
+def generate_fake_clients(count: int) -> None:
+    """
+    The function generates fake records for the "clients" table and commit the changes
+    * count - how many records should be created
+    """
+    fake = Faker()
+    # Connection to the database
+    try:
+        connection = connect(
+            dbname=dbname_,
+            user=user_,
+            password=password_,
+            host=host_,
+            port=port_
+        )
+        cursor = connection.cursor()
+        # Generation process
+        for _ in range(count):
+            # Fake data
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            email = fake.unique.safe_email()
+            phone_number = fake.unique.phone_number()
+            # Run SQL code
+            cursor.execute(f"""
+                INSERT INTO clients (first_name, last_name, email, phone_number)
+                VALUES ('{first_name}', '{last_name}', '{email}', '{phone_number}')
+            """)
+        connection.commit()
+    # Something went wrong
+    except Exception as error:
+        print(error)
+    # Disconnection
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+
 def generate_fake_products(count: int, min_price: int = 0, max_price: int = 999) -> None:
     """
     The function generates fake records for the "products" table and commit the changes
