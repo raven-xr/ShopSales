@@ -55,8 +55,8 @@ CREATE TABLE order_statuses
 INSERT INTO order_statuses
 VALUES
 (0, 'created', 'The order has just been created'),
-(1, 'pending', 'The manager is reviewing the order'),
-(2, 'canceled', 'The order is canceled'),
+(1, 'canceled', 'The order is canceled'),
+(2, 'pending', 'The order was reviewed and it''s on the way'),
 (3, 'finished', 'The order is delivered and finished');
 
 
