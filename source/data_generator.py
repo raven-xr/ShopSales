@@ -50,10 +50,10 @@ port_ = config["DATABASE"]["port"]
 user_ = config["USER"]["name"]
 
 
-def random_element(array: list):
+def random_element(iterable):
     """The function returns random item from iterable object"""
-    index = random.randint(0, len(array) - 1)
-    return array[index]
+    index = random.randint(0, len(iterable) - 1)
+    return iterable[index]
 
 
 def generate_fake_clients(count: int) -> None:
