@@ -2,6 +2,8 @@ from math import ceil
 import random
 import datetime as dt
 from decimal import Decimal
+import configparser
+
 from psycopg2 import connect
 from faker import Faker
 import faker_commerce
@@ -38,12 +40,14 @@ SPECIAL_COST_PRICE_ENDINGS = [
 ]
 
 
-# Data to connect to the DB. Don't forget to change it for yours
-dbname_ = "sale" 
-user_ = "postgres"
-password_ = "1928"
-host_ = "127.0.0.1"
-port_ = "5432"
+# Getting the server and the user data
+config = configparser.ConfigParser()
+config.read("server.cfg")
+dbname_ = config["DATABASE"]["name"]
+password_ = config["DATABASE"]["password"]
+host_ = config["DATABASE"]["host"]
+port_ = config["DATABASE"]["port"]
+user_ = config["USER"]["name"]
 
 
 def random_element(array: list):
